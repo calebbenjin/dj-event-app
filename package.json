@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "cookie": "^0.4.1",
     "cors": "^2.8.5",
     "moment": "^2.29.1",
     "next": "^10.1.3",
