@@ -6,7 +6,7 @@ import {NEXT_URL} from '@/lib/index'
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
 
@@ -16,8 +16,29 @@ export const AuthProvider = ({ children }) => {
   }
 
   // User Login
-  const login = ({email: identifier, password}) => {
-    console.log({identifier, password})
+  const login = async ({email: identifier, password}) => {
+
+    const res = await fetch(`${NEXT_URL}/api/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        identifier,
+        password
+      })
+    })
+
+    const data = await res.json()
+
+    console.log(data)
+
+    if(res.ok) {
+      setUser(data.user)
+    } else {
+      setError(data.message)
+      setError(null)
+    }
   }
 
 
