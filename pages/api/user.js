@@ -26,7 +26,7 @@ export default async (req, res) => {
     }
     
   } else {
-    res.setHeader('Allow', ['POST'])
+    res.setHeader('Allow', ['GET'])
     res.status(405).json({ message: `Method ${req.method} not allowed` })
   }
 }
